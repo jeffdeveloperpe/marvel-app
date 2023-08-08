@@ -3,7 +3,6 @@ package com.openpay.marvel.util;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 public class HashGenerator {
 
@@ -14,7 +13,11 @@ public class HashGenerator {
             MessageDigest md = MessageDigest.getInstance(MD5);
             byte[] bytes = md.digest(text.getBytes(StandardCharsets.UTF_8));
 
-            return Base64.getEncoder().encodeToString(bytes);
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toHexString((aByte & 0xFF) | 0x100), 1, 3);
+            }
+            return sb.toString();
         } catch (NoSuchAlgorithmException ex) {
             System.out.println(ex.getMessage());
             return null;

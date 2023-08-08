@@ -1,5 +1,5 @@
 marvel:
   apikey:
     public: 014aa34587d89e01118a947c9cea9a63
-    private: 9ff349934e06486f43835a66e53e3aa6edf7ddd5
+    secret: 9ff349934e06486f43835a66e53e3aa6edf7ddd5
   ts: 1
