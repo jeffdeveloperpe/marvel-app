@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Character {
 
     private Long id;
+    private String title;
     private String name;
     private String description;
     private String modified;
