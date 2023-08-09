@@ -1,10 +1,10 @@
 package com.openpay.marvel.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@ToString
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Thumbnail {

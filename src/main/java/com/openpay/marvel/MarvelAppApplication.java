@@ -16,6 +16,6 @@ public class MarvelAppApplication implements CommandLineRunner {
 	}
 
 	public void run(String... args) throws Exception {
-		service.list();
+		service.get(1011334L);
 	}
 }

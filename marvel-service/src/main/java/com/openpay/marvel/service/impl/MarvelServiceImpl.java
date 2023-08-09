@@ -1,7 +1,9 @@
 package com.openpay.marvel.service.impl;
 
+import com.openpay.marvel.model.MarvelResponse;
 import com.openpay.marvel.service.MarvelService;
 import com.openpay.marvel.util.HashGenerator;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,16 +27,27 @@ public class MarvelServiceImpl implements MarvelService {
     @Autowired private RestTemplate restTemplate;
 
     public void list() {
-        System.out.println(getUrl());
-        Object response = restTemplate.getForObject(getUrl(), Object.class);
+        System.out.println(getUrl(null));
+        var response = restTemplate.getForObject(getUrl(null), MarvelResponse.class);
         System.out.println(response);
     }
 
-    private String getUrl() {
-        return ENDPOINT_CHARACTERS +
-                "?apikey=" + apikeyPublic +
+    public void get(Long id) {
+        System.out.println(getUrl(id));
+        var response = restTemplate.getForObject(getUrl(id), MarvelResponse.class);
+        System.out.println(response);
+    }
+
+    private String getUrl(@Nullable Long id) {
+        var endpoint = id != null ?
+                ENDPOINT_CHARACTERS + '/' + id :
+                ENDPOINT_CHARACTERS;
+
+        var params = "?apikey=" + apikeyPublic +
                 "&ts=" + apiTs +
                 "&hash=" + getHash();
+
+        return endpoint + params;
     }
 
     private String getHash() {

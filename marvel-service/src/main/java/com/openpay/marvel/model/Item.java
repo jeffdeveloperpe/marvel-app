@@ -1,14 +1,15 @@
 package com.openpay.marvel.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@ToString
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comic {
+public class Item {
 
     private String resourceURI;
     private String name;
+    private String type;
 }
