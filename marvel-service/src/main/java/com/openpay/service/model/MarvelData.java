@@ -1,4 +1,4 @@
-package com.openpay.marvel.model;
+package com.openpay.service.model;
 
 import lombok.*;
 

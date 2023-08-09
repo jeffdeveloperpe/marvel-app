@@ -1,4 +1,4 @@
-package com.openpay.marvel.util;
+package com.openpay.service.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

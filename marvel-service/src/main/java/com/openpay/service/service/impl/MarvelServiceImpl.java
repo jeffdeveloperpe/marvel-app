@@ -1,15 +1,16 @@
-package com.openpay.marvel.service.impl;
+package com.openpay.service.service.impl;
 
-import com.openpay.marvel.model.MarvelResponse;
-import com.openpay.marvel.service.MarvelService;
-import com.openpay.marvel.util.HashGenerator;
+import com.openpay.service.service.MarvelService;
+import com.openpay.service.model.MarvelResponse;
+import com.openpay.service.util.HashGenerator;
 import jakarta.annotation.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@RequiredArgsConstructor
 public class MarvelServiceImpl implements MarvelService {
 
     private static final String URL_BASE = "https://gateway.marvel.com";
@@ -24,18 +25,14 @@ public class MarvelServiceImpl implements MarvelService {
     @Value("${marvel.ts}")
     private String apiTs;
 
-    @Autowired private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    public void list() {
-        System.out.println(getUrl(null));
-        var response = restTemplate.getForObject(getUrl(null), MarvelResponse.class);
-        System.out.println(response);
-    }
-
-    public void get(Long id) {
-        System.out.println(getUrl(id));
+    @Override
+    public MarvelResponse get(@Nullable Long id) {
         var response = restTemplate.getForObject(getUrl(id), MarvelResponse.class);
         System.out.println(response);
+
+        return response;
     }
 
     private String getUrl(@Nullable Long id) {
