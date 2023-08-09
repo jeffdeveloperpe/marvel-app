@@ -28,20 +28,19 @@ public class MarvelServiceImpl implements MarvelService {
     private final RestTemplate restTemplate;
 
     @Override
-    public MarvelResponse get(@Nullable Long id) {
-        var response = restTemplate.getForObject(getUrl(id), MarvelResponse.class);
+    public MarvelResponse get(@Nullable Long id, int offset) {
+        var response = restTemplate.getForObject(getUrl(id, offset), MarvelResponse.class);
         System.out.println(response);
 
         return response;
     }
 
-    private String getUrl(@Nullable Long id) {
+    private String getUrl(@Nullable Long id, int offset) {
         var endpoint = id != null ?
-                ENDPOINT_CHARACTERS + '/' + id :
-                ENDPOINT_CHARACTERS;
+                ENDPOINT_CHARACTERS + "/" + id + "?apikey=" + apikeyPublic :
+                ENDPOINT_CHARACTERS + "?apikey=" + apikeyPublic + "&offset=" + offset;
 
-        var params = "?apikey=" + apikeyPublic +
-                "&ts=" + apiTs +
+        var params = "&ts=" + apiTs +
                 "&hash=" + getHash();
 
         return endpoint + params;

@@ -4,5 +4,5 @@ import com.openpay.service.model.MarvelResponse;
 
 public interface MarvelService {
 
-    MarvelResponse get(Long id);
+    MarvelResponse get(Long id, int offset);
 }
