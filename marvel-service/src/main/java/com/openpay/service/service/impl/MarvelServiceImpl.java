@@ -1,5 +1,6 @@
 package com.openpay.service.service.impl;
 
+import com.openpay.service.service.AuditService;
 import com.openpay.service.service.MarvelService;
 import com.openpay.service.model.MarvelResponse;
 import com.openpay.service.util.HashGenerator;
@@ -30,6 +31,7 @@ public class MarvelServiceImpl implements MarvelService {
     private String apiTs;
 
     private final RestTemplate restTemplate;
+    private final AuditService auditService;
 
     @Override
     public MarvelResponse get(@Nullable Long id, int offset) {
@@ -72,6 +74,7 @@ public class MarvelServiceImpl implements MarvelService {
     }
 
     private String getUrl(@Nullable Long id, int offset, String baseEndpoint) {
+        auditService.save(baseEndpoint);
         var endpoint = id != null ?
                 baseEndpoint + "/" + id + "?apikey=" + apikeyPublic :
                 baseEndpoint + "?apikey=" + apikeyPublic + "&offset=" + offset;
